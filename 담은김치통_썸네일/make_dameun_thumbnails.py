@@ -72,6 +72,9 @@ def fmt_l(v):
 def find_font(size):
     candidates = [
         r"C:\Windows\Fonts\malgunbd.ttf", r"C:\Windows\Fonts\malgun.ttf",
+        "/usr/share/fonts/opentype/noto/NotoSansCJK-Bold.ttc",
+        "/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc",
+        "/usr/share/fonts/noto-cjk/NotoSansCJK-Bold.ttc",
         "/usr/share/fonts/truetype/wqy/wqy-zenhei.ttc",
         "/System/Library/Fonts/AppleSDGothicNeo.ttc",
     ]
@@ -91,6 +94,19 @@ def find_source(src_dir, handle, liters):
             if h in name and re.search(rf"(?<![\d.]){cap}", name, re.I):
                 return p, h != handle
     return None, False
+
+
+SOURCE_TAGS = ("드라이브", "네이버", "자사몰", "제작")
+
+
+def sources_of(folder):
+    """파일명 끝의 출처 표기(_드라이브/_네이버/_자사몰/_제작)를 모아 반환."""
+    tags = []
+    for p in sorted(folder.iterdir()):
+        for t in SOURCE_TAGS:
+            if p.suffix.lower() in IMG_EXT and re.search(rf"_{t}(_\d+)?$", p.stem) and t not in tags:
+                tags.append(t)
+    return ", ".join(tags)
 
 
 def trim(img):
@@ -157,10 +173,12 @@ def compose(items, badge):
         draw.text((80, 65), badge, font=f, fill="white")
 
     # 하단 구성 표기
-    caps = " + ".join(
-        fmt_l(l) + (f" {q}P" if q > 1 and "1+1" not in badge else "")
-        for _, l, q in items
-    )
+    def cap(l, q):
+        if "1+1" in badge:
+            q //= 2  # 1+1은 한 세트 기준 수량으로 표기
+        return fmt_l(l) + (f" {q}P" if q > 1 else "")
+
+    caps = " + ".join(cap(l, q) for _, l, q in items)
     f2 = find_font(44)
     tw = draw.textlength(caps, font=f2)
     draw.text(((CANVAS - tw) / 2, 880), caps, font=f2, fill="#222222")
@@ -186,7 +204,7 @@ def main():
         (pdir / "상품명.txt").write_text(full_name + "\n", encoding="utf-8")
 
         existing = [p for p in thumb_dir.iterdir() if p.suffix.lower() in IMG_EXT]
-        has_detail = any(detail_dir.iterdir())
+        has_detail = any(p.suffix.lower() in IMG_EXT + (".pdf",) for p in detail_dir.iterdir())
         status, note = "", []
 
         if existing and not args.force:
@@ -208,13 +226,15 @@ def main():
                 compose(items, badge).save(out, quality=95)
                 status = "썸네일 제작완료"
 
-        rows.append([group, folder, full_name, status,
-                     "있음" if has_detail else "없음(수집 필요)", "; ".join(note)])
+        rows.append([group, folder, full_name, status, sources_of(thumb_dir),
+                     "있음" if has_detail else "없음(수집 필요)", sources_of(detail_dir),
+                     "; ".join(note)])
         print(f"[{status}] {group}/{folder}")
 
     with open(base / "_작업현황.csv", "w", newline="", encoding="utf-8-sig") as fp:
         w = csv.writer(fp)
-        w.writerow(["그룹", "폴더", "상품명", "썸네일", "상세페이지", "비고"])
+        w.writerow(["그룹", "폴더", "상품명", "썸네일", "썸네일_출처",
+                    "상세페이지", "상세페이지_출처", "비고"])
         w.writerows(rows)
     print(f"\n완료: {base / '_작업현황.csv'}")
 
