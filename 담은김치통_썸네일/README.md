@@ -36,15 +36,15 @@
 | 소스 | 결과 |
 |---|---|
 | 구글 드라이브 폴더 `1wU-GEoiqkzY1HKZwnjViidBQJ9Ayhq_O` | 드라이브 커넥터의 검색/목록/메타데이터 조회가 모두 "not implemented/enabled"로 거부됨(첫 시도에서는 폴더 "not found") |
-| 네이버 브랜드스토어 `brand.naver.com/easynfree` | 네트워크 정책에서 차단(프록시 403), 웹 가져오기도 차단 |
-| 이지앤프리몰(자사몰) `shop.easynfreemall.com` | 네트워크 정책에서 차단(프록시 403 / egress blocked), 웹 가져오기도 차단 |
+| 네이버 브랜드스토어 `brand.naver.com/easynfree` | 네트워크 허용 후에도 네이버가 429(요청 제한/봇 차단)로 응답해 페이지를 받지 못함 |
+| 이지앤프리몰(자사몰) `shop.easynfreemall.com` | 네트워크 허용 후 접속됨. 단, 전체 카테고리·검색에 **"담은" 상품이 없고** 김치통은 "올라잇킵" 8종(상품번호 678~685)뿐. 상품 이미지는 `ecimg.cafe24img.com`에 있는데 이 도메인이 차단돼 받지 못함 |
 
 실제 제품 사진이 없어서 썸네일도 만들지 않았습니다(AI로 제품 외형을 생성하지 않는다는 원칙).
 합성 로직과 한글 폰트는 임시 도형 누끼로 테스트해서 정상 동작을 확인했습니다.
 
 ### 접근을 열려면
 클라우드 환경 설정(세션 제목줄의 환경 메뉴 → Edit → Network access)에서 아래 도메인을 허용 목록에 추가하거나 접근 수준을 넓히면 다시 수집할 수 있습니다.
-`brand.naver.com`, `smartstore.naver.com`, `shop-phinf.pstatic.net`, `shop.easynfreemall.com` (자사몰 이미지 CDN 도메인도 필요할 수 있음)
+`brand.naver.com`, `smartstore.naver.com`, `shop-phinf.pstatic.net`, `shop.easynfreemall.com`, `ecimg.cafe24img.com`(자사몰 이미지 CDN)
 
 ### 이어서 할 일
 1. 받은 이미지를 각 상품의 `썸네일/`, `상세페이지/`에 넣기. 파일명 끝에 출처 표기: `…_드라이브.jpg`, `…_네이버_2.jpg`, `…_자사몰.jpg`
