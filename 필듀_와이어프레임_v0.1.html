@@ -57,11 +57,48 @@
   .adlabel{font-size:9px;border:1px solid var(--yel);color:var(--yel);padding:0 4px;border-radius:3px;margin-right:4px}
   .skip{text-align:center;color:var(--mute);font-size:11px;text-decoration:underline}
   .section-label{font-size:10px;color:var(--mute);margin-top:2px}
+
+  /* ---- 말랑 듀 (도형 스케치, 실제 일러스트로 교체 예정) ---- */
+  .dew{display:inline-block;position:relative;width:10em;height:9.4em;flex:none;vertical-align:middle}
+  .dew i{position:absolute;display:block;box-sizing:border-box}
+  .dew .b{left:1.1em;top:.9em;width:7.8em;height:7.2em;border-radius:50%;background:#FFF4E8;border:.45em solid #FFD2BB;z-index:1}
+  .dew .e{top:1.3em;width:2.3em;height:2.3em;border-radius:50%;background:#FFD2BB}
+  .dew .e.l{left:.1em;z-index:0}
+  .dew .e.r{right:.1em;z-index:3}
+  .dew .e.r::before{content:"";position:absolute;inset:.42em;border-radius:50%;background:#FFEFE0}
+  .dew .e.r::after{content:"";position:absolute;left:1.0em;top:.45em;width:.5em;height:.7em;border-left:.14em solid #4A3228;border-bottom:.14em solid #4A3228}
+  .dew .a{top:4.3em;width:2em;height:2.7em;border-radius:50%;background:#FFF4E8;z-index:2;box-shadow:0 .1em .2em rgba(120,80,60,.18)}
+  .dew .a.l{left:0;transform:rotate(8deg)} .dew .a.r{right:0;transform:rotate(-8deg)}
+  .dew .f{top:7.6em;width:2.4em;height:1.8em;border-radius:50%;background:#FFF4E8;z-index:2}
+  .dew .f.l{left:2.2em} .dew .f.r{right:2.2em}
+  .dew .o{top:3.9em;width:.95em;height:.95em;border-radius:50%;background:#3A2218;z-index:4}
+  .dew .o.l{left:3.2em} .dew .o.r{left:5.9em}
+  .dew .m{left:4.15em;top:5.0em;width:1.7em;height:.85em;border-bottom:.22em solid #3A2218;border-radius:0 0 1em 1em;z-index:4}
+  .dew .c{top:5.0em;width:1.6em;height:1.05em;border-radius:50%;background:#FFB9A0;opacity:.8;z-index:3}
+  .dew .c.l{left:2.0em} .dew .c.r{left:6.4em}
+  .dew .x{display:none;z-index:5}
+  .dew.v-neutral .m{height:0;border-bottom-width:.2em;border-radius:0;width:1.2em;left:4.4em;top:5.5em}
+  .dew.v-happy .o{height:.55em;width:1.2em;background:none;border-top:.26em solid #3A2218;border-radius:1em 1em 0 0;top:4.0em}
+  .dew.v-happy .o.l{left:3.05em} .dew.v-happy .o.r{left:5.75em}
+  .dew.v-wave .a.l{top:2.2em;transform:rotate(35deg)}
+  .dew.v-wave .x{display:block;left:-.3em;top:.6em;width:.3em;height:1.2em;background:#F28B6D;border-radius:1em;transform:rotate(-30deg);color:transparent}
+  .dew.v-tap .a.r{top:1.9em;transform:rotate(-35deg)}
+  .dew.v-check .x{display:block;right:-.2em;top:6.3em;width:2.6em;height:2.6em;border-radius:50%;background:#7DB88A;color:#fff;font-style:normal;line-height:2.6em;text-align:center;font-weight:700}
+  .dew.v-shield .x{display:block;left:3.3em;top:5.9em;width:3.4em;height:3.4em;background:#fff;border:.22em solid #E7A98C;border-radius:.5em .5em 1.8em 1.8em;color:transparent}
+  .dew.v-card .x{display:block;left:2.9em;top:6.3em;width:4.2em;height:3em;background:#fff;border:.18em solid #E7A98C;border-radius:.5em;color:transparent}
+  .bubble{background:var(--box);border:1px solid var(--line);border-radius:12px;padding:6px 9px;font-size:11px;line-height:1.4}
+  .dewrow{display:flex;align-items:center;gap:6px}
+  .center{display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center}
+  .icon{width:76px;height:76px;border-radius:18px;background:linear-gradient(#FFE6D5,#FFD0B8);display:grid;place-items:center;overflow:hidden}
+  .gal{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+  .gal .box{display:flex;flex-direction:column;align-items:center;gap:2px;padding:6px 4px}
+  .push{background:var(--box);border:1px solid var(--line);border-radius:14px;padding:8px;display:flex;gap:8px;align-items:center}
+  .no{color:var(--red)}
 </style>
 </head>
 <body>
 <h1>필듀(가칭) 와이어프레임 v0.1</h1>
-<p class="sub">대외비 · 기획서 v1.9 기준 · 저해상도(구조 확인용). 색·글꼴·아이콘은 이후 디자인 단계에서 정함.</p>
+<p class="sub">대외비 · 기획서 v2.4 기준 · 저해상도(구조 확인용). <b>마스코트 말랑 듀</b>를 도형으로 그려 배치함(실제 그림은 GPT 시안으로 교체). 색·글꼴·아이콘은 이후 디자인 단계에서 정함.</p>
 <div class="legend">
   <span><span class="dot r"></span>확인 필요(과다·약물 주의)</span>
   <span><span class="dot y"></span>조정 권장(충돌·중복)</span>
@@ -77,6 +114,7 @@
   <div class="phone">
     <div class="status"><span>9:41</span><span>● ● ●</span></div>
     <div class="top"><span>시작하기</span><span class="mute">1 / 3</span></div>
+    <div class="dewrow"><span class="dew-slot" data-v="wave happy" data-size="62"></span><div class="bubble">안녕, 난 듀! 네 영양제 일정을 함께 챙길게.</div></div>
     <div class="box solid">이 정보는 <b>내 휴대폰에만</b> 저장돼요. 서버로 보내지 않아요.</div>
     <div class="section-label">성별</div>
     <div class="row"><span class="chip on">여성</span><span class="chip">남성</span></div>
@@ -87,7 +125,7 @@
     <div class="box">만 15세 이상만 가입할 수 있어요 <span class="check on"></span> 확인</div>
     <div class="btn" style="margin-top:auto">다음</div>
   </div>
-  <div class="note"><b>설계 메모</b> 성별·나이 구간·임신 여부 필수(§25). 정확한 생년월일은 받지 않음. 만 15세 확인은 체크로 처리.</div>
+  <div class="note"><b>설계 메모</b> 성별·나이 구간·임신 여부 필수(§25). 정확한 생년월일은 받지 않음. 만 15세 확인은 체크로 처리. 듀가 손 흔들며 등장하고 선택하면 고개를 끄덕임(§34-4-3).</div>
 </div>
 
 <!-- 2 온보딩: 목표 + 조건부 키몸무게 -->
@@ -138,7 +176,7 @@
   <div class="phone">
     <div class="status"><span>9:41</span><span>● ● ●</span></div>
     <div class="top"><span>오늘</span><span class="row"><span class="chip"><span class="dot r"></span>1</span><span class="chip"><span class="dot y"></span>2</span></span></div>
-    <div class="box solid row between"><span>오늘 챙긴 영양제</span><b>3 / 8</b></div>
+    <div class="box solid row between"><div><span>오늘 챙긴 영양제</span><br><b>3 / 8</b> <span class="mute">오늘도 하나씩!</span></div><span class="dew-slot" data-v="happy" data-size="46"></span></div>
     <div class="box"><div class="row between"><b>기상 직후 · 공복</b><span class="check on"></span></div><div class="mute">유산균 · 철분 + 비타민C</div></div>
     <div class="box"><div class="row between"><b>아침 식후</b><span class="check on"></span></div><div class="mute">종합비타민 · 비타민B</div></div>
     <div class="box"><div class="row between"><b>점심 식후</b><span class="check"></span></div><div class="mute">오메가3 · 루테인</div></div>
@@ -146,7 +184,7 @@
     <div class="box"><div class="row between"><b>취침 전</b><span class="check"></span></div><div class="mute">마그네슘</div></div>
     <div class="nav"><b>오늘</b><span>내 영양제</span><span>+ 등록</span><span>커뮤니티</span><span>설정</span></div>
   </div>
-  <div class="note"><b>설계 메모</b> 5슬롯(§4-2). 상단 배지로 경고 수 표시, 누르면 분석 결과로 이동. <b>이 화면에는 광고 없음</b>(§23-3).</div>
+  <div class="note"><b>설계 메모</b> 5슬롯(§4-2). 상단 배지로 경고 수 표시, 누르면 분석 결과로 이동. <b>이 화면에는 광고 없음</b>(§23-3). 진행 카드에 듀(눈웃음) 배치.</div>
 </div>
 
 <!-- 5 등록: 카메라 -->
@@ -187,7 +225,7 @@
   <h2>7. 분석 결과</h2>
   <div class="phone">
     <div class="status"><span>9:41</span><span>● ● ●</span></div>
-    <div class="top"><span>내 조합 분석</span><span class="mute">8개</span></div>
+    <div class="top"><span>내 조합 분석</span><span class="row"><span class="mute">8개</span><span class="dew-slot" data-v="neutral" data-size="26"></span></span></div>
     <div class="tabs"><span class="on">과다 1</span><span>중복 1</span><span>충돌 1</span><span>주의 1</span><span>부족 0</span></div>
     <div class="box solid"><div class="row"><span class="dot r"></span><b>비타민 B6 합계 120mg</b></div><div class="mute">하루 상한 100mg을 넘었어요 (제품 2개에 들어 있음)</div><div class="row" style="margin-top:4px"><span class="chip">근거 보기</span><span class="chip">이 제품 빼기</span></div></div>
     <div class="box solid"><div class="row"><span class="dot y"></span><b>칼슘 ↔ 철분</b></div><div class="mute">같이 먹으면 철 흡수가 줄어요. 2시간 이상 간격을 두세요.</div><div class="row" style="margin-top:4px"><span class="chip">근거 보기</span><span class="chip">시간표에 반영</span></div></div>
@@ -195,7 +233,7 @@
     <div class="box"><div class="row"><span class="dot r"></span><b>혈압약 + 홍삼</b></div><div class="mute">혈압 변동에 주의하세요. 복용 전 약사와 상담하세요.</div></div>
     <div class="disc">의학적 진단·치료·처방이 아닌 일반 건강 정보예요. 약을 드신다면 의사·약사와 상담하세요.</div>
   </div>
-  <div class="note"><b>설계 메모</b> 5탭(§4-2). 경고마다 근거 보기, 해결 액션 제공. 면책 문구 하단 고정. <b>광고 없음</b>.</div>
+  <div class="note"><b>설계 메모</b> 5탭(§4-2). 경고마다 근거 보기, 해결 액션 제공. 면책 문구 하단 고정. <b>광고 없음</b>. 듀는 작게, <b>중립 표정</b>(§34-4-5).</div>
 </div>
 
 <!-- 8 성분 합산 -->
@@ -219,7 +257,8 @@
   <h2>9. 임신 준비·임신 모드</h2>
   <div class="phone">
     <div class="status"><span>9:41</span><span>● ● ●</span></div>
-    <div class="top"><span>임신 준비중 모드</span><span class="mute">설정에서 변경</span></div>
+    <div class="top"><span>임신 준비중 모드</span><span class="dew-slot" data-v="neutral" data-size="28"></span></div>
+    <div class="tiny">설정에서 변경할 수 있어요</div>
     <div class="box solid">임신 준비 중에는 기준이 달라져요. 등록한 제품을 다시 확인했어요.</div>
     <div class="tabs"><span class="on">챙길 것</span><span>피할 것</span><span>체크리스트</span></div>
     <div class="box"><b>엽산</b> <span class="chip">난자·아기</span><div class="mute">하루 합계 400㎍ 정도가 일반적이에요. 용량은 의사와 상의하세요.</div></div>
@@ -232,7 +271,7 @@
     <div class="box"><span class="dot y"></span>체크한 항목은 <b>임의로 끊지 말고</b> 산부인과·약사와 상의하세요.</div>
     <div class="disc">광고가 표시되지 않는 화면이에요.</div>
   </div>
-  <div class="note"><b>설계 메모</b> §26~27. 근거 등급 라벨(확립·주의·불확실). 중단 지시 금지, 상담 안내 고정 문구. 임신 상태에서는 광고 미노출.</div>
+  <div class="note"><b>설계 메모</b> §26~27. 근거 등급 라벨(확립·주의·불확실). 중단 지시 금지, 상담 안내 고정 문구. 임신 상태에서는 광고 미노출. 듀는 작은 중립 표정, 가부 판단 대사 없음.</div>
 </div>
 
 <!-- 10 커뮤니티 -->
@@ -249,7 +288,7 @@
     <div class="box"><div class="row between"><b>점심 때 오메가3 먹으니 편해요</b><span>⋯</span></div></div>
     <div class="box solid"><span class="mute">⋯ 메뉴: 신고 · 차단 · 공유</span></div>
   </div>
-  <div class="note"><b>설계 메모</b> 광고는 커뮤니티 2곳만(§23-4). 운영자는 사유와 무관하게 삭제 가능, 이용자 신고·차단 제공(§31). 건강정보와 계정 미연결.</div>
+  <div class="note"><b>설계 메모</b> 광고는 커뮤니티 2곳만(§23-4). 운영자는 사유와 무관하게 삭제 가능, 이용자 신고·차단 제공(§31). 건강정보와 계정 미연결. <b>광고·스폰서 카드에는 듀를 쓰지 않음</b>(§34-4-6).</div>
 </div>
 
 <!-- 11 설정 -->
@@ -258,7 +297,7 @@
   <div class="phone">
     <div class="status"><span>9:41</span><span>● ● ●</span></div>
     <div class="top"><span>설정</span><span></span></div>
-    <div class="box solid"><b>내 건강 정보</b><div class="mute">성별·나이·목표·복용약 종류</div><div class="row between"><span class="mute">저장 위치</span><span class="chip on">이 기기에만</span></div></div>
+    <div class="box solid"><div class="row between"><b>내 건강 정보</b><span class="dew-slot" data-v="shield" data-size="44"></span></div><div class="mute">성별·나이·목표·복용약 종류</div><div class="row between"><span class="mute">저장 위치</span><span class="chip on">이 기기에만</span></div></div>
     <div class="box"><div class="row between"><b>알림 시간</b><span class="mute">식사 시간 기준 ›</span></div></div>
     <div class="box"><div class="row between"><b>임신·수유 상태</b><span class="mute">해당 없음 ›</span></div></div>
     <div class="box"><div class="row between"><b>백업 / 기기 변경</b><span class="mute">내 클라우드에 암호화 ›</span></div></div>
@@ -267,9 +306,103 @@
     <div class="box"><div class="row between"><b>광고 · 개인정보 안내</b><span class="mute">›</span></div><div class="tiny">건강 정보는 광고에 사용하지 않아요</div></div>
     <div class="disc" style="margin-top:auto">이용약관 · 개인정보 처리방침 · 면책 고지</div>
   </div>
-  <div class="note"><b>설계 메모</b> 기기 저장 원칙(§15-1)과 이용자 권리(§8-2). 내보내기·전체 삭제 원터치.</div>
+  <div class="note"><b>설계 메모</b> 기기 저장 원칙(§15-1)과 이용자 권리(§8-2). 내보내기·전체 삭제 원터치. 듀가 방패를 안고 "네 정보는 이 휴대폰 안에만 있어".</div>
+</div>
+
+
+<!-- 12 빈 화면 -->
+<div class="cell">
+  <h2>12. 빈 화면 (등록 전)</h2>
+  <div class="phone">
+    <div class="status"><span>9:41</span><span>● ● ●</span></div>
+    <div class="top"><span>오늘</span><span></span></div>
+    <div class="center" style="margin-top:26px">
+      <span class="dew-slot" data-v="card" data-size="120"></span>
+      <div class="bubble">아직 등록한 영양제가 없어. 첫 번째 영양제를 알려줘!</div>
+    </div>
+    <div class="btn" style="margin-top:18px">영양제 등록하기</div>
+    <div class="btn ghost">성분표 사진으로 등록</div>
+    <div class="nav"><b>오늘</b><span>내 영양제</span><span>+ 등록</span><span>커뮤니티</span><span>마이</span></div>
+  </div>
+  <div class="note"><b>설계 메모</b> 듀가 빈 기록 카드를 들고 등록 버튼을 안내(§34-4-3). 듀 대사는 반말, 버튼·안내는 해요체.</div>
+</div>
+
+<!-- 13 섭취 완료 -->
+<div class="cell">
+  <h2>13. 섭취 완료</h2>
+  <div class="phone">
+    <div class="status"><span>9:41</span><span>● ● ●</span></div>
+    <div class="top"><span>×</span><span>오늘의 기록</span><span></span></div>
+    <div class="center" style="margin-top:14px">
+      <span class="dew-slot" data-v="check happy" data-size="120"></span>
+      <div class="bubble">섭취 기록 완료! 오늘도 나를 챙겼네.</div>
+    </div>
+    <div class="box solid"><div class="row between"><b>오늘 8 / 8 기록</b><span class="mute">연속 5일</span></div>
+      <div class="row" style="margin-top:6px;justify-content:space-between"><span class="check on"></span><span class="check on"></span><span class="check on"></span><span class="check on"></span><span class="check on"></span><span class="check"></span><span class="check"></span></div>
+      <div class="tiny" style="display:flex;justify-content:space-between"><span>월</span><span>화</span><span>수</span><span>목</span><span>금</span><span>토</span><span>일</span></div></div>
+    <div class="box">몸이 안 좋은 날은 <u>오늘은 쉬어가기</u>로 연속 기록을 지킬 수 있어요.</div>
+    <div class="btn" style="margin-top:auto">확인</div>
+  </div>
+  <div class="note"><b>설계 메모</b> 기록 행동을 축하할 뿐 효능 표현 없음(§34-4-4). <b>양이 늘수록 보상 없음</b>, 경고가 남아 있으면 연출을 약하게(§34-3). 놓쳐도 듀는 슬프지 않음.</div>
+</div>
+
+<!-- 14 알림 -->
+<div class="cell">
+  <h2>14. 섭취 알림 (푸시)</h2>
+  <div class="phone">
+    <div class="status"><span></span><span>● ● ●</span></div>
+    <div class="center" style="margin-top:20px"><b style="font-size:34px">12:30</b><span class="mute">10월 26일 월요일</span></div>
+    <div class="push" style="margin-top:20px"><span class="icon" style="width:44px;height:44px;border-radius:11px"><span class="dew-slot" data-v="basic" data-size="38"></span></span>
+      <div><div class="tiny">필듀 · 지금</div><b>듀가 톡톡! 설정한 섭취 시간이야.</b><div class="mute">점심 식후 · 2개</div></div></div>
+    <div class="push"><span class="icon" style="width:44px;height:44px;border-radius:11px"><span class="dew-slot" data-v="basic" data-size="38"></span></span>
+      <div><div class="tiny">필듀 · 어제</div><b>오늘 기록이 아직 남아 있어요.</b><div class="mute">지금 확인하거나 쉬어가도 괜찮아요.</div></div></div>
+    <div class="box" style="margin-top:auto"><div class="tiny">알림에는 효능·치료 문구와 제품명 지목을 쓰지 않음</div></div>
+  </div>
+  <div class="note"><b>설계 메모</b> 듀가 시계를 톡톡(§34-4-3). 첫 알림은 듀의 반말, 두 번째처럼 기록이 밀린 알림은 <b>다그치지 않는 해요체</b>. 알림은 기기 로컬 알림으로 구현(§30-2).</div>
+</div>
+
+<!-- 15 듀 가이드 -->
+<div class="cell">
+  <h2>15. 듀 표정·앱 아이콘 가이드</h2>
+  <div class="phone">
+    <div class="status"><span>9:41</span><span>● ● ●</span></div>
+    <div class="top"><span>말랑 듀 컷 목록</span><span class="mute">시안 요청용</span></div>
+    <div class="gal">
+      <div class="box"><span class="dew-slot" data-v="basic" data-size="54"></span><span class="tiny">기본 미소</span></div>
+      <div class="box"><span class="dew-slot" data-v="wave happy" data-size="54"></span><span class="tiny">인사(눈웃음)</span></div>
+      <div class="box"><span class="dew-slot" data-v="tap" data-size="54"></span><span class="tiny">알림(시계 톡톡)</span></div>
+      <div class="box"><span class="dew-slot" data-v="check happy" data-size="54"></span><span class="tiny">섭취 완료</span></div>
+      <div class="box"><span class="dew-slot" data-v="neutral" data-size="54"></span><span class="tiny">중립(경고·임신·면책)</span></div>
+      <div class="box"><span class="dew-slot" data-v="shield" data-size="54"></span><span class="tiny">방패(마이)</span></div>
+    </div>
+    <div class="row between box">
+      <div><b>앱 아이콘 후보</b><div class="tiny">얼굴과 시계 귀 중심으로 단순화</div></div>
+      <span class="icon"><span class="dew-slot" data-v="basic" data-size="66"></span></span>
+    </div>
+    <div class="box"><div class="tiny"><span class="no">사용 안 함</span> 슬픔 · 아픔 · 졸림 · 화남 · 놀람 / 약품 표기 · 의사 가운 · 알약 몸통</div></div>
+  </div>
+  <div class="note"><b>설계 메모</b> §34-4-8 요청서와 같은 컷. 아이콘은 작은 크기(약 60px 이하)에서 시계 귀가 보이는지 확인 필요. 이 도형 그림은 위치 확인용이며 실제 캐릭터는 GPT 시안으로 교체.</div>
 </div>
 
 </div>
+
+<script>
+(function(){
+  var parts='<i class="b"></i><i class="e l"></i><i class="e r"></i><i class="a l"></i><i class="a r"></i><i class="f l"></i><i class="f r"></i><i class="c l"></i><i class="c r"></i><i class="o l"></i><i class="o r"></i><i class="m"></i><i class="x">&#10003;</i>';
+  var list=document.querySelectorAll('.dew-slot');
+  for(var i=0;i<list.length;i++){
+    var el=list[i];
+    var v=(el.getAttribute('data-v')||'basic').split(' ');
+    var cls='dew';
+    for(var j=0;j<v.length;j++){cls+=' v-'+v[j];}
+    var size=parseFloat(el.getAttribute('data-size')||'48');
+    el.className=cls;
+    el.style.fontSize=(size/10)+'px';
+    el.innerHTML=parts;
+    el.setAttribute('role','img');
+    el.setAttribute('aria-label','마스코트 듀');
+  }
+})();
+</script>
 </body>
 </html>
