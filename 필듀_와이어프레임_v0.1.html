@@ -94,17 +94,27 @@
   .gal .box{display:flex;flex-direction:column;align-items:center;gap:2px;padding:6px 4px}
   .push{background:var(--box);border:1px solid var(--line);border-radius:14px;padding:8px;display:flex;gap:8px;align-items:center}
   .no{color:var(--red)}
+  .dew-img{display:inline-block;flex:none;vertical-align:middle}
+  .dew-img img{display:block;width:100%;height:auto}
+  .dew-img.fb{outline:1px dashed var(--yel);outline-offset:2px;border-radius:6px}
+  .cutstatus{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:0 0 20px;font-size:11px}
+  .cutstatus .ttl{color:var(--mute);margin-right:4px}
+  .cutstatus .chip.ok{background:#e3f1e6;border-color:#8fc09a;color:#2c5e38}
+  .cutstatus .chip.no{background:var(--box);color:var(--mute)}
+  @media (prefers-color-scheme: dark){ .cutstatus .chip.ok{background:#22382a;color:#a8d6b3} }
 </style>
 </head>
 <body>
 <h1>필듀(가칭) 와이어프레임 v0.1</h1>
-<p class="sub">대외비 · 기획서 v2.4 기준 · 저해상도(구조 확인용). <b>마스코트 말랑 듀</b>를 도형으로 그려 배치함(실제 그림은 GPT 시안으로 교체). 색·글꼴·아이콘은 이후 디자인 단계에서 정함.</p>
+<p class="sub">대외비 · 기획서 v2.4 기준 · 저해상도(구조 확인용). <b>마스코트 말랑 듀</b>는 지금 도형 스케치이며, <b>마스코트 폴더에 컷 이미지를 넣으면 자동으로 실제 컷으로 바뀜</b>(파일 이름은 마스코트/README.md). 색·글꼴·아이콘은 이후 디자인 단계에서 정함.</p>
 <div class="legend">
   <span><span class="dot r"></span>확인 필요(과다·약물 주의)</span>
   <span><span class="dot y"></span>조정 권장(충돌·중복)</span>
   <span><span class="dot g"></span>양호</span>
   <span>점선 박스 = 영역, 굵은 박스 = 버튼, 노란 테두리 = 광고</span>
 </div>
+
+<div class="cutstatus" id="cutstatus"><span class="ttl">마스코트 컷 연결 현황</span><span class="mute">확인 중…</span></div>
 
 <div class="grid">
 
@@ -352,9 +362,9 @@
   <div class="phone">
     <div class="status"><span></span><span>● ● ●</span></div>
     <div class="center" style="margin-top:20px"><b style="font-size:34px">12:30</b><span class="mute">10월 26일 월요일</span></div>
-    <div class="push" style="margin-top:20px"><span class="icon" style="width:44px;height:44px;border-radius:11px"><span class="dew-slot" data-v="basic" data-size="38"></span></span>
+    <div class="push" style="margin-top:20px"><span class="icon" style="width:44px;height:44px;border-radius:11px"><span class="dew-slot" data-v="basic" data-cut="icon" data-size="38"></span></span>
       <div><div class="tiny">필듀 · 지금</div><b>듀가 톡톡! 설정한 섭취 시간이야.</b><div class="mute">점심 식후 · 2개</div></div></div>
-    <div class="push"><span class="icon" style="width:44px;height:44px;border-radius:11px"><span class="dew-slot" data-v="basic" data-size="38"></span></span>
+    <div class="push"><span class="icon" style="width:44px;height:44px;border-radius:11px"><span class="dew-slot" data-v="basic" data-cut="icon" data-size="38"></span></span>
       <div><div class="tiny">필듀 · 어제</div><b>오늘 기록이 아직 남아 있어요.</b><div class="mute">지금 확인하거나 쉬어가도 괜찮아요.</div></div></div>
     <div class="box" style="margin-top:auto"><div class="tiny">알림에는 효능·치료 문구와 제품명 지목을 쓰지 않음</div></div>
   </div>
@@ -377,7 +387,7 @@
     </div>
     <div class="row between box">
       <div><b>앱 아이콘 후보</b><div class="tiny">얼굴과 시계 귀 중심으로 단순화</div></div>
-      <span class="icon"><span class="dew-slot" data-v="basic" data-size="66"></span></span>
+      <span class="icon"><span class="dew-slot" data-v="basic" data-cut="icon" data-size="66"></span></span>
     </div>
     <div class="box"><div class="tiny"><span class="no">사용 안 함</span> 슬픔 · 아픔 · 졸림 · 화남 · 놀람 / 약품 표기 · 의사 가운 · 알약 몸통</div></div>
   </div>
@@ -387,20 +397,96 @@
 </div>
 
 <script>
+/* 말랑 듀 컷 연결
+   - 마스코트/ 폴더에 dew_<이름>.webp(또는 png, jpg, svg)를 넣으면 도형 스케치 대신 실제 컷이 표시됨.
+   - 이름이 다른 파일은 아래 CUT_FILES에 직접 지정할 수 있음. 예: basic: '마스코트/필듀_말랑듀_01.webp'
+   - 해당 컷이 없으면 기본 컷(basic)으로 임시 대체하고 노란 점선으로 표시. 기본 컷도 없으면 도형 스케치 유지. */
 (function(){
+  var BASE='마스코트/';
+  var EXTS=['webp','png','jpg','jpeg','svg'];
+  var CUTS=[['basic','기본 미소'],['hello','인사(눈웃음)'],['happy','신남·눈웃음'],['alarm','알림(시계 톡톡)'],['done','섭취 완료'],['streak','연속 기록'],['empty','빈 화면'],['rest','쉬어가기'],['neutral','중립(경고용)'],['shield','방패(마이)'],['icon','앱 아이콘'],['splash','스플래시']];
+  var CUT_FILES={};
+  var VMAP={'basic':'basic','wave happy':'hello','happy':'happy','tap':'alarm','check happy':'done','neutral':'neutral','shield':'shield','card':'empty'};
+
   var parts='<i class="b"></i><i class="e l"></i><i class="e r"></i><i class="a l"></i><i class="a r"></i><i class="f l"></i><i class="f r"></i><i class="c l"></i><i class="c r"></i><i class="o l"></i><i class="o r"></i><i class="m"></i><i class="x">&#10003;</i>';
-  var list=document.querySelectorAll('.dew-slot');
-  for(var i=0;i<list.length;i++){
-    var el=list[i];
+  var slots=document.querySelectorAll('.dew-slot');
+  var i,j;
+
+  /* 1단계: 도형 스케치를 먼저 그림 */
+  for(i=0;i<slots.length;i++){
+    var el=slots[i];
     var v=(el.getAttribute('data-v')||'basic').split(' ');
     var cls='dew';
-    for(var j=0;j<v.length;j++){cls+=' v-'+v[j];}
+    for(j=0;j<v.length;j++){cls+=' v-'+v[j];}
     var size=parseFloat(el.getAttribute('data-size')||'48');
     el.className=cls;
     el.style.fontSize=(size/10)+'px';
     el.innerHTML=parts;
     el.setAttribute('role','img');
     el.setAttribute('aria-label','마스코트 듀');
+  }
+
+  /* 2단계: 컷 파일이 있는지 순서대로 확인 */
+  function probe(key,cb){
+    var cands=[];
+    if(CUT_FILES[key]){cands.push(CUT_FILES[key]);}
+    for(var k=0;k<EXTS.length;k++){cands.push(BASE+'dew_'+key+'.'+EXTS[k]);}
+    var n=0;
+    function next(){
+      if(n>=cands.length){cb(null);return;}
+      var url=cands[n++];
+      var im=new Image();
+      im.onload=function(){cb(url);};
+      im.onerror=next;
+      im.src=url;
+    }
+    next();
+  }
+
+  var found={};
+  var pending=CUTS.length;
+  function finish(){
+    /* 3단계: 찾은 컷으로 교체 */
+    for(var a=0;a<slots.length;a++){
+      var s=slots[a];
+      var key=s.getAttribute('data-cut')||VMAP[(s.getAttribute('data-v')||'basic')]||'basic';
+      var url=found[key];
+      var fb=false;
+      if(!url&&found.basic){url=found.basic;fb=true;}
+      if(!url){continue;}
+      var size=parseFloat(s.getAttribute('data-size')||'48');
+      s.className='dew-img'+(fb?' fb':'');
+      s.style.fontSize='';
+      s.style.width=size+'px';
+      s.innerHTML='';
+      var img=document.createElement('img');
+      img.src=url;
+      img.alt='마스코트 듀';
+      if(fb){s.title='이 컷이 없어 기본 컷으로 임시 대체('+key+')';}
+      s.appendChild(img);
+    }
+    /* 4단계: 연결 현황 표시 */
+    var box=document.getElementById('cutstatus');
+    if(box){
+      var html='<span class="ttl">마스코트 컷 연결 현황</span>';
+      var ok=0;
+      for(var b=0;b<CUTS.length;b++){
+        var has=!!found[CUTS[b][0]];
+        if(has){ok++;}
+        html+='<span class="chip '+(has?'ok':'no')+'">'+(has?'✓ ':'✗ ')+CUTS[b][1]+'</span>';
+      }
+      html+='<span class="mute">'+ok+' / '+CUTS.length+' · 없는 컷은 기본 컷 또는 도형 스케치로 표시</span>';
+      box.innerHTML=html;
+    }
+  }
+  for(i=0;i<CUTS.length;i++){
+    (function(key){
+      probe(key,function(url){
+        if(url){found[key]=url;}
+        pending--;
+        if(pending===0){finish();}
+      });
+    })(CUTS[i][0]);
   }
 })();
 </script>
